@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import Home from "./components/Home.js";
+import style from "./style";
+import Quizz from "./components/Quizz.js";
 
-export default function App() {
+function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={style.container}>
+      <Home />
     </View>
   );
+}
+function QuizzScreen() {
+  return (
+    <View style={style.container}>
+      <Quizz />
+    </View>
+  );
+}
+
+export default function App() {
+  return <View style={styles.container}>{QuizzScreen()}</View>;
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
