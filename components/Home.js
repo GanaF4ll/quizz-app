@@ -14,14 +14,14 @@ export default class Home extends Component {
     return (
       <View style={style.container}>
         <Text style={style.big_title}>Quizz</Text>
-        <Text style={{ color: "black" }}>Nom d'utilisateur: </Text>
+        <Text style={{ color: "black" }}>Username: </Text>
 
         <TextInput style={style.input} />
         <TouchableOpacity
           style={style.btn_start}
           onPress={() => this.props.navigation.navigate("PartySettings")}
         >
-          <Text style={{ color: "white" }}>Nouvelle partie</Text>
+          <Text style={{ color: "white" }}>START !</Text>
         </TouchableOpacity>
       </View>
     );
