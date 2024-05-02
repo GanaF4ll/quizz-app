@@ -4,7 +4,7 @@ import { Picker } from "@react-native-picker/picker";
 import axios from "axios";
 import style from "../style";
 
-const Categories = () => {
+const Categories = (props) => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -33,7 +33,12 @@ const Categories = () => {
       <Picker
         style={style.dropdown}
         selectedValue={selectedCategory}
-        onValueChange={(itemValue, itemIndex) => setSelectedCategory(itemValue)}
+        onValueChange={(itemValue, itemIndex) => {
+          // console.log("itemValue:", itemValue);
+          // console.log("itemIndex:", itemIndex);
+          setSelectedCategory(itemValue);
+          props.setSelectedCategory(itemValue);
+        }}
       >
         <Picker.Item label="any" value={null} />
         {categories.map((category) => (

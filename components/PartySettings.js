@@ -6,7 +6,8 @@ import { Picker } from "@react-native-picker/picker";
 import Categories from "./Categories";
 
 const PartySettings = ({ navigation }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState();
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [isPickerVisible, setPickerVisible] = useState(false);
 
   return (
@@ -26,13 +27,18 @@ const PartySettings = ({ navigation }) => {
           <Picker.Item label="Medium" value="Medium" />
           <Picker.Item label="Hard" value="Hard" />
         </Picker>
-        <Categories />
+        <Categories setSelectedCategory={setSelectedCategory} />
       </View>
 
       <View style={style.footer}>
         <TouchableOpacity
           style={style.btn_validate}
-          onPress={() => navigation.navigate("Quizz")}
+          onPress={() =>
+            navigation.navigate("Quizz", {
+              selectedCategoryId: selectedCategory,
+              selectedDifficulty: selectedLanguage,
+            })
+          }
           disabled={!selectedLanguage}
         >
           <AntDesign
