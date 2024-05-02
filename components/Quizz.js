@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Answer from "./Answer";
+import he from "he";
 
 import style from "../style";
 import axios from "axios";
@@ -13,7 +14,11 @@ const Quizz = () => {
       const response = await axios.get("https://opentdb.com/api.php?amount=10");
       return response.data.results[0];
     } catch (error) {
-      console.log("error: ", error);
+      if (error.response && error.response.status === 429) {
+        console.log("Too many requests. Please try again later.");
+      } else {
+        console.log("error: ", error);
+      }
     }
   };
 
@@ -35,8 +40,16 @@ const Quizz = () => {
 
   return (
     <View style={style.container}>
-      <Text style={style.title}>{questionData.question}</Text>
-      <Answer answers={shuffledAnswers} />
+      <View>
+        <Text style={style.title}>{he.decode(questionData.question)}</Text>
+        <Answer answers={shuffledAnswers} />
+      </View>
+      <TouchableOpacity
+        style={style.btn_validate}
+        // onPress={() => this.submit()}
+      >
+        <Text>Valider</Text>
+      </TouchableOpacity>
     </View>
   );
 };
