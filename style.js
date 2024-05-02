@@ -16,6 +16,17 @@ export default StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "column",
+  },
+  body: {
+    height: "85%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  footer: {
+    height: "10%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   primary: {
     backgroundColor: "#007ACC",
@@ -48,6 +59,14 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  btn_settings: {
+    backgroundColor: "#ffcc66",
+    padding: 10,
+    borderRadius: 5,
+    margin: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   btn_start: {
     backgroundColor: "#cc00cc",
     padding: 10,
@@ -62,5 +81,12 @@ export default StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     color: "#66ffff",
+  },
+  dropdown: {
+    width: 250,
+    height: 200,
+    borderColor: "#ffcc66",
+    borderWidth: 1,
+    borderRadius: 18,
   },
 });

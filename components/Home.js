@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+
 import React, { Component } from "react";
 import style from "../style";
 
@@ -18,7 +19,7 @@ export default class Home extends Component {
         <TextInput style={style.input} />
         <TouchableOpacity
           style={style.btn_start}
-          onPress={() => this.props.navigation.navigate("Quizz")}
+          onPress={() => this.props.navigation.navigate("PartySettings")}
         >
           <Text style={{ color: "white" }}>Nouvelle partie</Text>
         </TouchableOpacity>

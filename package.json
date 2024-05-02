@@ -15,7 +15,10 @@
     "expo-status-bar": "~1.11.1",
     "he": "^1.2.0",
     "react": "18.2.0",
-    "react-native": "0.73.6"
+    "react-native": "0.73.6",
+    "react-native-picker-select": "^9.1.3",
+    "@react-native-picker/picker": "2.6.1",
+    "@expo/vector-icons": "^14.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
