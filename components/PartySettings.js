@@ -21,6 +21,7 @@ const PartySettings = ({ navigation }) => {
             setPickerVisible(false);
           }}
         >
+          <Picker.Item label="..." value="..." />
           <Picker.Item label="Easy" value="Easy" />
           <Picker.Item label="Medium" value="Medium" />
           <Picker.Item label="Hard" value="Hard" />

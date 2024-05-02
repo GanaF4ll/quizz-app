@@ -5,7 +5,7 @@ import he from "he";
 
 export default function Answer({ answers }) {
   return (
-    <View style={style.container}>
+    <View style={style.view_answer}>
       {answers.map((answer, index) => (
         <TouchableOpacity
           key={index}

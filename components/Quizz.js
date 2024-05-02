@@ -9,6 +9,8 @@ import axios from "axios";
 const Quizz = () => {
   const [questionData, setQuestionData] = useState(null);
 
+  const url = "https://opentdb.com/api.php?amount=10";
+
   const fetchQuizz = async () => {
     try {
       const response = await axios.get("https://opentdb.com/api.php?amount=10");
@@ -40,10 +42,10 @@ const Quizz = () => {
 
   return (
     <View style={style.container}>
-      <View>
-        <Text style={style.title}>{he.decode(questionData.question)}</Text>
-        <Answer answers={shuffledAnswers} />
-      </View>
+      <Text style={style.title}>{he.decode(questionData.question)}</Text>
+
+      <Answer answers={shuffledAnswers} />
+
       <TouchableOpacity
         style={style.btn_validate}
         // onPress={() => this.submit()}

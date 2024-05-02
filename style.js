@@ -46,8 +46,8 @@ export default StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     margin: 2,
-    width: "50%",
-    height: "19%",
+    width: "45%",
+    height: 100,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -88,5 +88,10 @@ export default StyleSheet.create({
     borderColor: "#ffcc66",
     borderWidth: 1,
     borderRadius: 18,
+  },
+  view_answer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
   },
 });
