@@ -39,12 +39,13 @@ const PartySettings = ({ navigation }) => {
               selectedDifficulty: selectedLanguage,
             })
           }
-          disabled={!selectedLanguage}
+          // disabled={!selectedLanguage}
         >
           <AntDesign
             name="arrowright"
             size={24}
-            color={selectedLanguage ? "black" : "gray"}
+            color="black"
+            // color={selectedLanguage ? "black" : "gray"}
           />
         </TouchableOpacity>
       </View>
