@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import Answer from "./Answer";
-import he from "he";
-
-import style from "../style";
 import axios from "axios";
+import style from "../style";
+import he from "he";
 
 const Quizz = ({ route }) => {
   const { selectedCategoryId, selectedDifficulty } = route.params;
@@ -15,31 +14,31 @@ const Quizz = ({ route }) => {
 
   useEffect(() => {
     const fetchQuizz = async () => {
-      let url = "https://opentdb.com/api.php?amount=10";
+      let url = `https://opentdb.com/api.php?amount=50&type=multiple`;
 
       if (selectedCategoryId !== null) {
-        url = url + "&category=" + selectedCategoryId;
+        url += `&category=${selectedCategoryId}`;
       }
 
-      if (selectedDifficulty === "Easy") {
-        url = url + "&difficulty=easy";
-      } else if (selectedDifficulty === "Medium") {
-        url = url + "&difficulty=medium";
-      } else if (selectedDifficulty === "Hard") {
-        url = url + "&difficulty=hard";
+      if (selectedDifficulty) {
+        url += `&difficulty=${selectedDifficulty.toLowerCase()}`;
       }
-
-      url = url + "&type=multiple";
 
       try {
         const response = await axios.get(url);
-        setQuestions(response.data.results);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          console.log("Too many requests. Please try again later.");
+        if (response.data.results && response.data.results.length > 0) {
+          setQuestions(
+            response.data.results.map((question) => ({
+              question: question.question,
+              answers: [...question.incorrect_answers, question.correct_answer],
+              correctIndex: question.incorrect_answers.length,
+            }))
+          );
         } else {
-          console.log("error: ", error);
+          console.log("No questions found in the response.");
         }
+      } catch (error) {
+        console.log("Error fetching questions: ", error);
       }
     };
 
@@ -51,45 +50,14 @@ const Quizz = ({ route }) => {
   };
 
   const handleValidation = () => {
-    const correctAnswerIndex = shuffledAnswers.findIndex(
-      (answer) => answer.value === 1
-    );
+    const correctAnswerIndex = questions[currentQuestionIndex].correctIndex;
 
     if (selectedAnswer === correctAnswerIndex) {
-      // Increase the score
       setScore(score + 1);
     }
-    // Proceed to the next question
+
     setCurrentQuestionIndex(currentQuestionIndex + 1);
-    setSelectedAnswer(null); // Reset selected answer
-  };
-
-  const fetchQuizz = async () => {
-    let url = "https://opentdb.com/api.php?amount=10";
-
-    if (selectedCategoryId !== null) {
-      url = url + "&category=" + selectedCategoryId;
-    }
-
-    if (selectedDifficulty === "Easy") {
-      url = url + "&difficulty=easy";
-    } else if (selectedDifficulty === "Medium") {
-      url = url + "&difficulty=medium";
-    } else if (selectedDifficulty === "Hard") {
-      url = url + "&difficulty=hard";
-    }
-
-    try {
-      const response = await axios.get(url);
-      setQuestions(response.data.results);
-      setCurrentQuestionIndex(0); // Reset question index
-    } catch (error) {
-      if (error.response && error.response.status === 429) {
-        console.log("Too many requests. Please try again later.");
-      } else {
-        console.log("error: ", error);
-      }
-    }
+    setSelectedAnswer(null);
   };
 
   if (questions.length === 0) {
@@ -97,27 +65,16 @@ const Quizz = ({ route }) => {
   }
 
   const currentQuestion = questions[currentQuestionIndex];
-
-  const answers = [
-    ...currentQuestion.incorrect_answers.map((answer) => ({
-      text: answer,
-      value: 0,
-    })),
-    { text: currentQuestion.correct_answer, value: 1 },
-  ];
-
-  const shuffledAnswers = answers.sort(() => Math.random() - 0.5);
+  const answers = currentQuestion.answers;
 
   return (
     <View style={style.container}>
       <Text style={style.title}>Score: {score}</Text>
       <Text style={style.title}>{he.decode(currentQuestion.question)}</Text>
-
       <Answer
-        answers={shuffledAnswers}
+        answers={answers}
         onSelectAnswer={handleAnswerSelection}
         selectedAnswerIndex={selectedAnswer}
-        setSelectedAnswer={setSelectedAnswer}
         handleValidation={handleValidation}
       />
     </View>

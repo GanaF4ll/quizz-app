@@ -83,7 +83,7 @@ export default StyleSheet.create({
     color: "#66ffff",
   },
   dropdown: {
-    width: 250,
+    width: 350,
     height: 200,
     borderColor: "#ffcc66",
     borderWidth: 1,
