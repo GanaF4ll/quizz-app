@@ -51,7 +51,11 @@ const Quizz = ({ route }) => {
   };
 
   const handleValidation = () => {
-    if (selectedAnswer === 1) {
+    const correctAnswerIndex = shuffledAnswers.findIndex(
+      (answer) => answer.value === 1
+    );
+
+    if (selectedAnswer === correctAnswerIndex) {
       // Increase the score
       setScore(score + 1);
     }
@@ -112,7 +116,7 @@ const Quizz = ({ route }) => {
       <Answer
         answers={shuffledAnswers}
         onSelectAnswer={handleAnswerSelection}
-        selectedAnswer={selectedAnswer}
+        selectedAnswerIndex={selectedAnswer}
         setSelectedAnswer={setSelectedAnswer}
         handleValidation={handleValidation}
       />

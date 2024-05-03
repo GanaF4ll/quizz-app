@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import style from "../style";
 import he from "he";
@@ -6,22 +6,24 @@ import he from "he";
 export default function Answer({
   answers,
   onSelectAnswer,
-  selectedAnswer,
+  selectedAnswerIndex, // Pass the index of selected answer
   setSelectedAnswer,
   handleValidation,
 }) {
-  const [shuffledAnswers, setShuffledAnswers] = useState(() => {
-    return [...answers].sort(() => Math.random() - 0.5);
-  });
+  const [shuffledAnswers, setShuffledAnswers] = useState([]);
+
+  useEffect(() => {
+    setShuffledAnswers(() => [...answers].sort(() => Math.random() - 0.5));
+  }, [answers]);
 
   const handleAnswerSelection = (index) => {
     onSelectAnswer(index);
+    setSelectedAnswer(index);
     if (shuffledAnswers[index].value === 1) {
       console.log("La réponse est correcte !");
     } else {
       console.log("La réponse est incorrecte.");
     }
-    setSelectedAnswer(index);
   };
 
   return (
@@ -31,7 +33,9 @@ export default function Answer({
           key={index}
           style={[
             style.btn_answer,
-            index === selectedAnswer ? { backgroundColor: "#cc00cc" } : null,
+            index === selectedAnswerIndex
+              ? { backgroundColor: "#cc00cc" }
+              : null,
           ]}
           onPress={() => handleAnswerSelection(index)}
         >
@@ -41,9 +45,9 @@ export default function Answer({
       <TouchableOpacity
         style={[
           style.btn_validate,
-          selectedAnswer === null && { opacity: 0.5 },
+          selectedAnswerIndex === null && { opacity: 0.5 },
         ]}
-        disabled={selectedAnswer === null}
+        disabled={selectedAnswerIndex === null}
         onPress={handleValidation}
       >
         <Text>Valider</Text>
