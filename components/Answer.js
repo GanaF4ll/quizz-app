@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import style from "../style";
+import he from "he";
 
 const Answer = ({
   answers,
@@ -25,7 +26,7 @@ const Answer = ({
           ]}
           onPress={() => onSelectAnswer(index)}
         >
-          <Text>{answer}</Text>
+          <Text>{he.decode(answer)}</Text>
         </TouchableOpacity>
       ))}
       <TouchableOpacity

@@ -92,7 +92,7 @@ const Quizz = ({ route, navigation }) => {
       <View style={style.header}>
         <TouchableOpacity
           style={style.btn_settings}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("Home", { score: score })}
         >
           <AntDesign name="home" size={24} color="#ffcc66" />
         </TouchableOpacity>
