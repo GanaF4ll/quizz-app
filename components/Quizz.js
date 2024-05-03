@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import Answer from "./Answer";
 import axios from "axios";
 import style from "../style";
 import he from "he";
+import { AntDesign } from "@expo/vector-icons";
 
-const Quizz = ({ route }) => {
+const Quizz = ({ route, navigation }) => {
   const { selectedCategoryId, selectedDifficulty } = route.params;
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -68,15 +69,42 @@ const Quizz = ({ route }) => {
   const answers = currentQuestion.answers;
 
   return (
+    // <View style={style.container}>
+    //   <TouchableOpacity
+    //     style={style.btn_start}
+    //     onPress={() => navigation.navigate("Home")}
+    //   >
+    //     <AntDesign name="home" size={24} color="black" />
+    //   </TouchableOpacity>
+    //   <Text style={style.title}>Score: {score}</Text>
+    //   <Text style={style.title}>{he.decode(currentQuestion.question)}</Text>
+    //   <Answer
+    //     answers={answers}
+    //     onSelectAnswer={handleAnswerSelection}
+    //     selectedAnswerIndex={selectedAnswer}
+    //     handleValidation={handleValidation}
+    //   />
+    // </View>
     <View style={style.container}>
-      <Text style={style.title}>Score: {score}</Text>
-      <Text style={style.title}>{he.decode(currentQuestion.question)}</Text>
-      <Answer
-        answers={answers}
-        onSelectAnswer={handleAnswerSelection}
-        selectedAnswerIndex={selectedAnswer}
-        handleValidation={handleValidation}
-      />
+      <View style={style.header}>
+        <TouchableOpacity
+          style={style.btn_start}
+          onPress={() => navigation.navigate("Home")}
+        >
+          <AntDesign name="home" size={24} color="black" />
+        </TouchableOpacity>
+      </View>
+
+      <View style={style.body}>
+        <Text style={style.title}>Score: {score}</Text>
+        <Text style={style.title}>{he.decode(currentQuestion.question)}</Text>
+        <Answer
+          answers={answers}
+          onSelectAnswer={handleAnswerSelection}
+          selectedAnswerIndex={selectedAnswer}
+          handleValidation={handleValidation}
+        />
+      </View>
     </View>
   );
 };

@@ -19,7 +19,7 @@ export default StyleSheet.create({
     flexDirection: "column",
   },
   body: {
-    height: "85%",
+    height: "75%",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -27,6 +27,9 @@ export default StyleSheet.create({
     height: "10%",
     alignItems: "center",
     justifyContent: "center",
+  },
+  header: {
+    height: "10%",
   },
   primary: {
     backgroundColor: "#007ACC",
@@ -50,6 +53,8 @@ export default StyleSheet.create({
     height: 100,
     alignItems: "center",
     justifyContent: "center",
+    borderColor: "#cc00cc",
+    borderWidth: 2,
   },
   btn_validate: {
     backgroundColor: "#66ff66",
@@ -86,7 +91,7 @@ export default StyleSheet.create({
     width: 350,
     height: 200,
     borderColor: "#ffcc66",
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 18,
   },
   view_answer: {

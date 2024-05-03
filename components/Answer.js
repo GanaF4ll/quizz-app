@@ -16,7 +16,11 @@ const Answer = ({
           style={[
             style.btn_answer,
             index === selectedAnswerIndex
-              ? { backgroundColor: "#cc00cc" }
+              ? {
+                  backgroundColor: "#cc00cc",
+                  borderWidth: 2,
+                  borderColor: "#ffcc66",
+                }
               : null,
           ]}
           onPress={() => onSelectAnswer(index)}
