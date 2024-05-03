@@ -9,9 +9,11 @@ import axios from "axios";
 const Quizz = ({ route }) => {
   const { selectedCategoryId, selectedDifficulty } = route.params;
   const [questionData, setQuestionData] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+
   let url = "https://opentdb.com/api.php?amount=10";
 
-  console.log("selectedCategoryId:", selectedCategoryId);
+  // console.log("selectedCategoryId:", selectedCategoryId);
 
   if (selectedCategoryId !== null) {
     url = url + "&category=" + selectedCategoryId;
@@ -24,9 +26,9 @@ const Quizz = ({ route }) => {
   } else if (selectedDifficulty === "Hard") {
     url = url + "&difficulty=hard";
   }
-  console.log(url);
+  // console.log(url);
 
-  console.log("selectedCategoryId:", route.params.selectedCategoryId);
+  // console.log("selectedCategoryId:", route.params.selectedCategoryId);
 
   const fetchQuizz = async () => {
     try {
@@ -50,19 +52,36 @@ const Quizz = ({ route }) => {
   }
 
   const answers = [
-    ...questionData.incorrect_answers,
-    questionData.correct_answer,
+    ...questionData.incorrect_answers.map((answer) => ({
+      text: answer,
+      value: 0,
+    })),
+    { text: questionData.correct_answer, value: 1 },
   ];
 
   const shuffledAnswers = answers.sort(() => Math.random() - 0.5);
 
+  const handleAnswerSelection = (index) => {
+    setSelectedAnswer(index);
+  };
+
+  const isAnswerSelected = selectedAnswer !== null;
+  const score = 0;
+
   return (
     <View style={style.container}>
+      <Text style={style.title}>Score: {score}</Text>
       <Text style={style.title}>{he.decode(questionData.question)}</Text>
 
-      <Answer answers={shuffledAnswers} />
+      <Answer
+        answers={shuffledAnswers}
+        onSelectAnswer={handleAnswerSelection}
+      />
 
-      <TouchableOpacity style={style.btn_validate}>
+      <TouchableOpacity
+        style={[style.btn_validate, !isAnswerSelected && { opacity: 0.5 }]}
+        disabled={!isAnswerSelected}
+      >
         <Text>Valider</Text>
       </TouchableOpacity>
     </View>

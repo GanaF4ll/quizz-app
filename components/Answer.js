@@ -3,32 +3,39 @@ import { Text, TouchableOpacity, View } from "react-native";
 import style from "../style";
 import he from "he";
 
-export default function Answer({ answers, correctAnswer }) {
+export default function Answer({ answers, onSelectAnswer }) {
+  const [shuffledAnswers, setShuffledAnswers] = useState(() => {
+    return [...answers].sort(() => Math.random() - 0.5);
+  });
+
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
-  const [isCorrect, setIsCorrect] = useState(null);
 
   const handleAnswerSelection = (index) => {
     setSelectedAnswerIndex(index);
-    setIsCorrect(answers[index] === correctAnswer);
+    onSelectAnswer(index);
+    if (shuffledAnswers[index].value === 1) {
+      console.log("La réponse est correcte !");
+    } else {
+      console.log("La réponse est incorrecte.");
+    }
   };
 
   return (
     <View style={style.view_answer}>
-      {answers.map((answer, index) => (
+      {shuffledAnswers.map((answer, index) => (
         <TouchableOpacity
           key={index}
           style={[
             style.btn_answer,
-            selectedAnswerIndex === index && { backgroundColor: "#cc00cc" },
+            index === selectedAnswerIndex
+              ? { backgroundColor: "#cc00cc" }
+              : null,
           ]}
           onPress={() => handleAnswerSelection(index)}
         >
-          <Text>{answer}</Text>
+          <Text>{answer.text}</Text>
         </TouchableOpacity>
       ))}
-      {isCorrect !== null && (
-        <Text>{isCorrect ? "Correct answer!" : "Wrong answer!"}</Text>
-      )}
     </View>
   );
 }
