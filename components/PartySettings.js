@@ -13,7 +13,7 @@ const PartySettings = ({ navigation }) => {
   return (
     <View style={style.container}>
       <View style={style.body}>
-        <Text>Choisissez la difficulté</Text>
+        <Text>Choose the difficulty</Text>
         <Picker
           style={style.dropdown}
           selectedValue={selectedLanguage}

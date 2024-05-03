@@ -28,7 +28,7 @@ const Categories = (props) => {
   return (
     <View>
       <Text style={{ marginTop: 10, textAlign: "center" }}>
-        Choisissez la catégorie
+        Choose the category
       </Text>
       <Picker
         style={style.dropdown}
