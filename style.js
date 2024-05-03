@@ -31,9 +31,6 @@ export default StyleSheet.create({
   header: {
     height: "10%",
   },
-  primary: {
-    backgroundColor: "#007ACC",
-  },
   input: {
     borderColor: "#ffcc66",
     borderWidth: 1,
