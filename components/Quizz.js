@@ -10,6 +10,7 @@ const Quizz = ({ route }) => {
   const { selectedCategoryId, selectedDifficulty } = route.params;
   const [questionData, setQuestionData] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [score, setScore] = useState(0);
 
   let url = "https://opentdb.com/api.php?amount=10";
 
@@ -66,7 +67,6 @@ const Quizz = ({ route }) => {
   };
 
   const isAnswerSelected = selectedAnswer !== null;
-  const score = 0;
 
   return (
     <View style={style.container}>
@@ -76,6 +76,7 @@ const Quizz = ({ route }) => {
       <Answer
         answers={shuffledAnswers}
         onSelectAnswer={handleAnswerSelection}
+        onCorrectAnswer={() => setScore(score + 1)}
       />
 
       <TouchableOpacity

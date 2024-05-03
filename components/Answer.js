@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import style from "../style";
 import he from "he";
 
-export default function Answer({ answers, onSelectAnswer }) {
+export default function Answer({ answers, onSelectAnswer, onCorrectAnswer }) {
   const [shuffledAnswers, setShuffledAnswers] = useState(() => {
     return [...answers].sort(() => Math.random() - 0.5);
   });
@@ -15,11 +15,11 @@ export default function Answer({ answers, onSelectAnswer }) {
     onSelectAnswer(index);
     if (shuffledAnswers[index].value === 1) {
       console.log("La réponse est correcte !");
+      onCorrectAnswer();
     } else {
       console.log("La réponse est incorrecte.");
     }
   };
-
   return (
     <View style={style.view_answer}>
       {shuffledAnswers.map((answer, index) => (
