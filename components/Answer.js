@@ -6,7 +6,7 @@ import he from "he";
 export default function Answer({
   answers,
   onSelectAnswer,
-  selectedAnswerIndex, // Pass the index of selected answer
+  selectedAnswerIndex,
   setSelectedAnswer,
   handleValidation,
 }) {
