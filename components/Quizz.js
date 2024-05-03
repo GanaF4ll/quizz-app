@@ -29,6 +29,8 @@ const Quizz = ({ route }) => {
         url = url + "&difficulty=hard";
       }
 
+      url = url + "&type=multiple";
+
       try {
         const response = await axios.get(url);
         setQuestions(response.data.results);
@@ -50,12 +52,40 @@ const Quizz = ({ route }) => {
 
   const handleValidation = () => {
     if (selectedAnswer === 1) {
+      // Increase the score
       setScore(score + 1);
     }
-
+    // Proceed to the next question
     setCurrentQuestionIndex(currentQuestionIndex + 1);
+    setSelectedAnswer(null); // Reset selected answer
+  };
 
-    setSelectedAnswer(null);
+  const fetchQuizz = async () => {
+    let url = "https://opentdb.com/api.php?amount=10";
+
+    if (selectedCategoryId !== null) {
+      url = url + "&category=" + selectedCategoryId;
+    }
+
+    if (selectedDifficulty === "Easy") {
+      url = url + "&difficulty=easy";
+    } else if (selectedDifficulty === "Medium") {
+      url = url + "&difficulty=medium";
+    } else if (selectedDifficulty === "Hard") {
+      url = url + "&difficulty=hard";
+    }
+
+    try {
+      const response = await axios.get(url);
+      setQuestions(response.data.results);
+      setCurrentQuestionIndex(0); // Reset question index
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        console.log("Too many requests. Please try again later.");
+      } else {
+        console.log("error: ", error);
+      }
+    }
   };
 
   if (questions.length === 0) {
