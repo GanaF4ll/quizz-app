@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, ImageBackground } from "react-native";
 import Answer from "./Answer";
 import axios from "axios";
 import style from "../style";
@@ -85,13 +85,16 @@ const Quizz = ({ route, navigation }) => {
     //     handleValidation={handleValidation}
     //   />
     // </View>
-    <View style={style.container}>
+    <ImageBackground
+      source={require("../assets/bg.png")}
+      style={style.container}
+    >
       <View style={style.header}>
         <TouchableOpacity
-          style={style.btn_start}
+          style={style.btn_settings}
           onPress={() => navigation.navigate("Home")}
         >
-          <AntDesign name="home" size={24} color="black" />
+          <AntDesign name="home" size={24} color="#ffcc66" />
         </TouchableOpacity>
       </View>
 
@@ -105,7 +108,7 @@ const Quizz = ({ route, navigation }) => {
           handleValidation={handleValidation}
         />
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 

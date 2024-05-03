@@ -4,6 +4,8 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Image,
+  ImageBackground,
 } from "react-native";
 
 import React, { Component } from "react";
@@ -12,18 +14,21 @@ import style from "../style";
 export default class Home extends Component {
   render() {
     return (
-      <View style={style.container}>
+      <ImageBackground
+        source={require("../assets/bg.png")}
+        style={style.container}
+      >
         <Text style={style.big_title}>Quizz</Text>
         <Text style={{ color: "black" }}>Username: </Text>
 
         <TextInput style={style.input} />
         <TouchableOpacity
-          style={style.btn_start}
+          style={style.btn_settings}
           onPress={() => this.props.navigation.navigate("PartySettings")}
         >
-          <Text style={{ color: "white" }}>START !</Text>
+          <Text style={{ color: "#ffcc66" }}>START !</Text>
         </TouchableOpacity>
-      </View>
+      </ImageBackground>
     );
   }
 }

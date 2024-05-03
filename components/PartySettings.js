@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ImageBackground } from "react-native";
 import style from "../style";
 import { AntDesign } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
@@ -11,7 +11,10 @@ const PartySettings = ({ navigation }) => {
   const [isPickerVisible, setPickerVisible] = useState(false);
 
   return (
-    <View style={style.container}>
+    <ImageBackground
+      source={require("../assets/bg.png")}
+      style={style.container}
+    >
       <View style={style.body}>
         <Text>Choose the difficulty</Text>
         <Picker
@@ -29,10 +32,9 @@ const PartySettings = ({ navigation }) => {
         </Picker>
         <Categories setSelectedCategory={setSelectedCategory} />
       </View>
-
       <View style={style.footer}>
         <TouchableOpacity
-          style={style.btn_validate}
+          style={style.btn_settings}
           onPress={() =>
             navigation.navigate("Quizz", {
               selectedCategoryId: selectedCategory,
@@ -44,12 +46,12 @@ const PartySettings = ({ navigation }) => {
           <AntDesign
             name="arrowright"
             size={24}
-            color="black"
+            color="#ffcc66"
             // color={selectedLanguage ? "black" : "gray"}
           />
         </TouchableOpacity>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 

@@ -19,7 +19,7 @@ const Answer = ({
               ? {
                   backgroundColor: "#cc00cc",
                   borderWidth: 2,
-                  borderColor: "#ffcc66",
+                  borderColor: "#66ffff",
                 }
               : null,
           ]}
@@ -30,7 +30,7 @@ const Answer = ({
       ))}
       <TouchableOpacity
         style={[
-          style.btn_validate,
+          style.btn_settings,
           selectedAnswerIndex !== null ? style.validated : null,
         ]}
         disabled={selectedAnswerIndex === null}
@@ -41,5 +41,4 @@ const Answer = ({
     </View>
   );
 };
-
 export default Answer;

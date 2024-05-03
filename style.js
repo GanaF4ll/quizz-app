@@ -32,7 +32,7 @@ export default StyleSheet.create({
     height: "10%",
   },
   input: {
-    borderColor: "#ffcc66",
+    borderColor: "#cc00cc",
     borderWidth: 1,
     width: 200,
     height: 40,
@@ -53,30 +53,16 @@ export default StyleSheet.create({
     borderColor: "#cc00cc",
     borderWidth: 2,
   },
-  btn_validate: {
-    backgroundColor: "#66ff66",
-    padding: 10,
-    borderRadius: 5,
-    margin: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   btn_settings: {
-    backgroundColor: "#ffcc66",
-    padding: 10,
-    borderRadius: 5,
-    margin: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  btn_start: {
     backgroundColor: "#cc00cc",
     padding: 10,
     borderRadius: 5,
     margin: 5,
     alignItems: "center",
     justifyContent: "center",
+    color: "#ffcc66",
   },
+
   color: "#66ffff",
   movieTitle: {
     fontSize: 20,
@@ -87,7 +73,7 @@ export default StyleSheet.create({
   dropdown: {
     width: 350,
     height: 200,
-    borderColor: "#ffcc66",
+    borderColor: "#cc00cc",
     borderWidth: 2,
     borderRadius: 18,
   },
