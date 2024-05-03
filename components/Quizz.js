@@ -14,8 +14,6 @@ const Quizz = ({ route }) => {
 
   let url = "https://opentdb.com/api.php?amount=10";
 
-  // console.log("selectedCategoryId:", selectedCategoryId);
-
   if (selectedCategoryId !== null) {
     url = url + "&category=" + selectedCategoryId;
   }
@@ -27,9 +25,6 @@ const Quizz = ({ route }) => {
   } else if (selectedDifficulty === "Hard") {
     url = url + "&difficulty=hard";
   }
-  // console.log(url);
-
-  // console.log("selectedCategoryId:", route.params.selectedCategoryId);
 
   const fetchQuizz = async () => {
     try {
@@ -66,6 +61,16 @@ const Quizz = ({ route }) => {
     setSelectedAnswer(index);
   };
 
+  const correctAnswerIndex = shuffledAnswers.findIndex(
+    (answer) => answer.value === 1
+  );
+
+  const handleValidation = () => {
+    if (selectedAnswer === 1) {
+      // Augmenter le score
+      setScore(score + 1);
+    }
+  };
   const isAnswerSelected = selectedAnswer !== null;
 
   return (
@@ -76,15 +81,10 @@ const Quizz = ({ route }) => {
       <Answer
         answers={shuffledAnswers}
         onSelectAnswer={handleAnswerSelection}
-        onCorrectAnswer={() => setScore(score + 1)}
+        selectedAnswer={selectedAnswer}
+        setSelectedAnswer={setSelectedAnswer}
+        handleValidation={handleValidation}
       />
-
-      <TouchableOpacity
-        style={[style.btn_validate, !isAnswerSelected && { opacity: 0.5 }]}
-        disabled={!isAnswerSelected}
-      >
-        <Text>Valider</Text>
-      </TouchableOpacity>
     </View>
   );
 };
